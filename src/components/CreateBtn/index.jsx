@@ -35,7 +35,7 @@ const CreateBtn = ({ onCreate, preItems }) => {
 
 CreateBtn.propTypes = {
   onCreate: PropTypes.func.isRequired,
-  preItems: PropTypes.array.isRequired
+  // preItems: PropTypes.array.isRequired
 }
 
 export default CreateBtn

@@ -7,53 +7,56 @@ import CreateBtn from '../../components/CreateBtn'
 import './index.css'
 import { TYPE_INCOME, TYPE_OUTCOME } from '../../utils/constants'
 import { parseToYearAndMonth, padLeft } from '../../utils/functions'
+import withContext from '../../withContext'
 
-const itemsArr = [
-    {
-        id: 1,
-        title: 'HangZhou travel',
-        price: 200,
-        date: '2022-03-07',
-        cid: 1
-    },
-    {
-        id: 2,
-        title: 'Buy something',
-        price: 200,
-        date: '2022-03-07',
-        cid: 2
-    },
-    {
-        id: 3,
-        title: 'Buy something',
-        price: 50,
-        date: '2022-04-07',
-        cid: 1
-    }
-]
+// const items = [
+//     {
+//         id: 1,
+//         title: 'HangZhou travel',
+//         price: 200,
+//         date: '2022-03-07',
+//         cid: 1
+//     },
+//     {
+//         id: 2,
+//         title: 'Buy something',
+//         price: 200,
+//         date: '2022-03-07',
+//         cid: 2
+//     },
+//     {
+//         id: 3,
+//         title: 'Buy something',
+//         price: 50,
+//         date: '2022-04-07',
+//         cid: 1
+//     }
+// ]
 
-const categoies = {
-    1: {
-        id: 1,
-        name: '旅行',
-        type: 'outcome',
-        iconName: 'ios-plane'
-    },
-    2: {
-        id: 1,
-        name: '购物',
-        type: 'income',
-        iconName: 'ios-plane'
-    }
-}
+// const categories = {
+//     1: {
+//         id: 1,
+//         name: '旅行',
+//         type: 'outcome',
+//         iconName: 'ios-plane'
+//     },
+//     2: {
+//         id: 1,
+//         name: '购物',
+//         type: 'income',
+//         iconName: 'ios-plane'
+//     }
+// }
 
-const Home = () => {
+const Home = props => {
+    let { categories, items } = props;
+    items = [...Object.values(items)];
 
-    const [items, setItems] = useState(itemsArr)
+    const [itemsArr, setItems] = useState(items)
     const [currentDate, setCurrentDate] = useState(parseToYearAndMonth())
 
-    const itemsWithCategory = items.map(item => {
-        item.category = categoies[item.cid];
+    const itemsWithCategory = itemsArr.map(item => {
+        item.category = categories[item.cid];
         return item;
     }).filter(item => {
         return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
@@ -73,7 +76,7 @@ const Home = () => {
             <header className='home-header'>
                 <div className='row'>
                     <div className="col picker">
-                        <MonthPicker year={currentDate.year} month={currentDate.month} setCurrentDate={setCurrentDate}/>
+                        <MonthPicker year={currentDate.year} month={currentDate.month} setCurrentDate={setCurrentDate} />
                     </div>
                     <div className="col">
                         <TotalPrice income={totalIncome} outcome={totalOutcome} />
@@ -98,4 +101,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default withContext(Home)
