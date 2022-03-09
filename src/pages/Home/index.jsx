@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PriceList from '../../components/PriceList'
-import ViewTab from '../../components/ViewTab'
+import Tabs from '../../components/Tabs'
 import MonthPicker from '../../components/MonthPicker'
 import TotalPrice from '../../components/TotalPrice'
 import CreateBtn from '../../components/CreateBtn'
@@ -81,7 +81,7 @@ const Home = () => {
                 </div>
             </header>
             <div className='content-area py-3 px-3'>
-                <ViewTab>
+                <Tabs>
                     <div label="列表模式" icon="ios-paper">
                         <CreateBtn onCreate={setItems} preItems={items} />
                         <PriceList
@@ -92,7 +92,7 @@ const Home = () => {
                     <div label="图表模式" icon="ios-pie">
                         <CreateBtn onCreate={setItems} preItems={items} />
                     </div>
-                </ViewTab>
+                </Tabs>
             </div>
         </>
     )

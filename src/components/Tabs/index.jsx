@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Ionicon from 'react-ionicons'
 import PropTypes from 'prop-types'
 
-const ViewTab = props => {
+const Tabs = props => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     function handleTabClick(index) {
@@ -10,7 +10,7 @@ const ViewTab = props => {
     }
 
     function titleClass(index) {
-        return index === currentIndex ? 'nav-link' : 'nav-link active';
+        return index === currentIndex ? 'nav-link active' : 'nav-link';
     }
 
     return (
@@ -47,4 +47,4 @@ const ViewTab = props => {
     )
 }
 
-export default ViewTab
+export default Tabs

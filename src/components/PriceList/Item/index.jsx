@@ -25,8 +25,8 @@ const Item = ({ item, items, setItems }) => {
             <span className='col-1'>
                 <Ionicon
                     className="rounded-circle"
-                    fontSize="30px"
-                    style={{backgroundColor: '#bfa', padding: '5px'}}
+                    fontSize="35px"
+                    style={{backgroundColor: '#bfa', padding: '4px'}}
                     color={'#fff'}
                     icon={item.category.iconName}
                 />
@@ -41,8 +41,8 @@ const Item = ({ item, items, setItems }) => {
                 onClick={() => { onModifyItem(item) }}>
                 <Ionicon 
                 className="rounded-circle"
-                fontSize="30px"
-                style={{ backgroundColor: '#bfa', padding: '5px'}}
+                fontSize="35px"
+                style={{ backgroundColor: '#bfa', padding: '4px'}}
                 color={'#fff'}
                 icon='ios-create-outline'
               />
@@ -51,8 +51,8 @@ const Item = ({ item, items, setItems }) => {
                 onClick={() => { onDeleteItem(item) }}>
                 <Ionicon 
                 className="rounded-circle"
-                fontSize="30px"
-                style={{ backgroundColor: 'red', padding: '5px'}}
+                fontSize="35px"
+                style={{ backgroundColor: 'red', padding: '4px'}}
                 color={'#fff'}
                 icon='ios-close'
               />
