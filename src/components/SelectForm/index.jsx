@@ -11,10 +11,15 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
     const [errorMessage, setErrorMessage] = useState('')
     const navigate = useNavigate();
 
+    const defaultTitle = editItem ? editItem.title : '';
+    const defaultPrice = editItem ? editItem.price : '';
+    const defaultDate = editItem ? editItem.date : '';
+
     function handleSubmitForm(e) {
         const title = titleInput.current.value.trim();
         const price = priceInput.current.value.trim() * 1;
         const date = dateInput.current.value.trim();
+        console.log(editItem);
         const editMode = !!editItem; // 感叹号转换布尔值, 双感叹号取反, 判断是否为编辑模式
 
         if (title && price && date) {
@@ -31,14 +36,19 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
                 setErrorMessage('')
                 setValidatePass(true)
                 if (editMode) {
-                    console.log('edit mode');
+                    onSubmitForm({
+                        ...editItem,
+                        title,
+                        price,
+                        date
+                    }, editMode);
+                    navigate('/')
                 } else {
-                    console.log(category);
                     onSubmitForm({
                         id: Math.random().toString().slice(2), //生成随机数
                         price, title, date,
                         cid: (category.id * 1)
-                    }, false);
+                    }, editMode);
                     navigate('/')
                 }
             }
@@ -60,7 +70,7 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
                 <input
                     type="text" className="form-control"
                     id="title" placeholder="请输入标题"
-                    defaultValue={editItem.title} ref={titleInput} />
+                    defaultValue={defaultTitle} ref={titleInput} />
             </div>
             <div className="form-group">
                 <label htmlFor="price">价格 *</label>
@@ -72,7 +82,7 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
                         type="number"
                         className="form-control"
                         id="price" placeholder="请输入价格"
-                        defaultValue={editItem.price} ref={priceInput}
+                        defaultValue={defaultPrice} ref={priceInput}
                     />
                 </div>
             </div>
@@ -81,7 +91,7 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
                 <input
                     type="date" className="form-control"
                     id="date" placeholder="请输入日期"
-                    defaultValue={editItem.date} ref={dateInput}
+                    defaultValue={defaultDate} ref={dateInput}
                 />
             </div>
             <button type="submit" className="btn btn-primary mr-3">提交</button>

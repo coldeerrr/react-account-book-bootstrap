@@ -53,14 +53,23 @@ const App = () => {
         deleteItem: (item) => {
             delete items[item.id];
             setItems({ ...items })
-            console.log(items);
         },
         createItem: (item, category) => {
             const cateNum = Object.keys(categories).length + 1;
             setItems(Object.assign({ [item.id]: item }, { ...items }));
             setCategories(Object.assign({ [cateNum]: category }, { ...categories }));
-            console.log(categories, items);
-        }
+            console.log(category, categories, items);
+        },
+        updateItem: (item, category) => {
+            const updatedItem = {
+                ...item,
+                cid: category.id,
+                title: item.title,
+                price: item.price,
+                date: item.date
+            };
+            setItems(Object.assign({...items}, {[updatedItem.id]: updatedItem}))
+        },
     }
 
     return (

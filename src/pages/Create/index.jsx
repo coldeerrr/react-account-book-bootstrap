@@ -9,10 +9,8 @@ import withContext from "../../withContext";
 const Create = props => {
     const {categories, items, actions} = props
     const { id } = useParams();
-    const editItem = (id && items[id]) ? items[id] : {};
+    const editItem = (id && items[id]) ? items[id] : null;
     const [category, setCategory] = useState((editItem && editItem.cid) ? categories[editItem.cid] : null);
-
-    console.log(editItem);
 
     function submitForm (data, isEditMode) {
         if(!isEditMode) {
@@ -20,7 +18,7 @@ const Create = props => {
             actions.createItem(data, category);
         }else {
             // update
-            console.log(editItem);
+            actions.updateItem(data, category);
         }
     }
 
