@@ -8,7 +8,7 @@ const MonthPicker = ({ year, month, setCurrentDate }) => {
     const [currentYear, setCurrentYear] = useState(year);
     const [currentMonth, setCurrentMonth] = useState(month);
     const btn = useRef();
-    // const yearBtn = useRef();
+    const yearBtn = useRef();
 
     useEffect(() => {
         document.addEventListener('click', handleClick, false);
@@ -19,13 +19,13 @@ const MonthPicker = ({ year, month, setCurrentDate }) => {
 
     // 点击除选择框以外的地方选择框收起
     function handleClick(e) {
-        // if (!yearBtn.current.contains(e.target)){
+        if (yearBtn.current && !yearBtn.current.contains(e.target)){
             // 忽略选择框
-            if (btn.current.contains(e.target)) {
+            if (btn.current && btn.current.contains(e.target)) {
                 return;
             }
             setIsOpen(false);
-        // }
+        }
     }
 
     function handleDropdown(e) {
@@ -62,7 +62,7 @@ const MonthPicker = ({ year, month, setCurrentDate }) => {
             {isOpen &&
                 <div className="dropdown-menu" style={{ display: 'block' }}>
                     <div className="row">
-                        <div className="col border-right">
+                        <div className="col border-right" ref={yearBtn}>
                             {yearArr.map((yearItem, index) =>
                                 <a
                                     href="#"

@@ -1,19 +1,21 @@
 import React, { useRef, useState } from "react";
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom'
 import { isValidDate } from "../../utils/functions";
 
-const SelectForm = ({ category, id }) => {
+const SelectForm = ({ category, editItem, onSubmitForm }) => {
     const titleInput = useRef();
     const priceInput = useRef();
     const dateInput = useRef();
     const [validatePass, setValidatePass] = useState(true);
     const [errorMessage, setErrorMessage] = useState('')
+    const navigate = useNavigate();
 
-    function submitForm(e) {
-        const title = titleInput.current.value.trim() * 1;
-        const price = priceInput.current.value.trim();
+    function handleSubmitForm(e) {
+        const title = titleInput.current.value.trim();
+        const price = priceInput.current.value.trim() * 1;
         const date = dateInput.current.value.trim();
-        const editMode = !!id; // 感叹号转换布尔值, 双感叹号取反, 判断是否为编辑模式
+        const editMode = !!editItem; // 感叹号转换布尔值, 双感叹号取反, 判断是否为编辑模式
 
         if (title && price && date) {
             if (price < 0) {
@@ -22,13 +24,22 @@ const SelectForm = ({ category, id }) => {
             } else if (!isValidDate(date)) {
                 setErrorMessage('请填写正确的日期格式')
                 setValidatePass(false)
+            } else if (!category) {
+                setErrorMessage('请选择一个种类')
+                setValidatePass(false)
             } else {
                 setErrorMessage('')
                 setValidatePass(true)
                 if (editMode) {
                     console.log('edit mode');
                 } else {
-                    console.log(title, price, date);
+                    console.log(category);
+                    onSubmitForm({
+                        id: Math.random().toString().slice(2), //生成随机数
+                        price, title, date,
+                        cid: (category.id * 1)
+                    }, false);
+                    navigate('/')
                 }
             }
         } else {
@@ -38,14 +49,18 @@ const SelectForm = ({ category, id }) => {
         e.preventDefault();
     }
 
+    function handleCancleSubmit() {
+        navigate('/')
+    }
+
     return (
-        <form onSubmit={(e) => submitForm(e)}>
+        <form onSubmit={(e) => handleSubmitForm(e)}>
             <div className="form-group">
                 <label htmlFor="title">标题 *</label>
                 <input
                     type="text" className="form-control"
                     id="title" placeholder="请输入标题"
-                    defaultValue="" ref={titleInput} />
+                    defaultValue={editItem.title} ref={titleInput} />
             </div>
             <div className="form-group">
                 <label htmlFor="price">价格 *</label>
@@ -57,7 +72,7 @@ const SelectForm = ({ category, id }) => {
                         type="number"
                         className="form-control"
                         id="price" placeholder="请输入价格"
-                        defaultValue="" ref={priceInput}
+                        defaultValue={editItem.price} ref={priceInput}
                     />
                 </div>
             </div>
@@ -66,11 +81,11 @@ const SelectForm = ({ category, id }) => {
                 <input
                     type="date" className="form-control"
                     id="date" placeholder="请输入日期"
-                    defaultValue="" ref={dateInput}
+                    defaultValue={editItem.date} ref={dateInput}
                 />
             </div>
             <button type="submit" className="btn btn-primary mr-3">提交</button>
-            <button className="btn btn-secondary"> 取消 </button>
+            <button className="btn btn-secondary" onClick={handleCancleSubmit}> 取消 </button>
             {
                 !validatePass &&
                 <div className="alert alert-danger mt-5" role="alert">

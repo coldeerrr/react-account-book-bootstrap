@@ -49,11 +49,25 @@ const App = () => {
     const [categories, setCategories] = useState(flatternArr(categoriesArr));
     const [items, setItems] = useState(flatternArr(itemsArr));
 
+    const actions = {
+        deleteItem: (item) => {
+            delete items[item.id];
+            setItems({ ...items })
+            console.log(items);
+        },
+        createItem: (item, category) => {
+            const cateNum = Object.keys(categories).length + 1;
+            setItems(Object.assign({ [item.id]: item }, { ...items }));
+            setCategories(Object.assign({ [cateNum]: category }, { ...categories }));
+            console.log(categories, items);
+        }
+    }
+
     return (
-        <AppContext.Provider value={{categories, items}}>
+        <AppContext.Provider value={{ categories, items, actions }}>
             <BrowserRouter>
                 <Routes>
-                    <Route path='/*' element={<Home />} />
+                    <Route path='/' element={<Home />} />
                     <Route path='create' element={<Create />} />
                     <Route path='edit/:id' element={<Create />} />
                 </Routes>

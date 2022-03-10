@@ -101,8 +101,10 @@ const categories = [
     }
 ];
 
-const SelectCategory = ({ type, setCategory }) => {
-    const [selected, setSelected] = useState({});
+const SelectCategory = ({ type, category, setCategory }) => {
+    const [selected, setSelected] = useState(category);
+
+    console.log(selected);
 
     function handleSelect (e, category) {
         e.preventDefault();
@@ -115,8 +117,8 @@ const SelectCategory = ({ type, setCategory }) => {
             {
                 categories.filter(category => category.type === type).map(category => {
                     const { name, iconName, id } = category;
-                    const backColor = (selected && selected.id === id) ? '#337eff' : "#eff0ef";
-                    const iconColor = (selected && selected.id === id) ? '#fff' : "#555";
+                    const backColor = (selected && selected.id * 1 === id * 1) ? '#337eff' : "#eff0ef";
+                    const iconColor = (selected && selected.id * 1 === id * 1) ? '#fff' : "#555";
                     return (
                         <div key={id} className='col-3' style={{ textAlign: 'center' }} onClick={(e) => handleSelect(e, category)}>
                             <Ionicon

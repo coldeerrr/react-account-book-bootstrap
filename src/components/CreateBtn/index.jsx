@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Ionicon from 'react-ionicons'
+import { useNavigate } from 'react-router-dom'
 
 const newItem = {
   id: 4,
@@ -10,10 +11,14 @@ const newItem = {
   cid: 1
 };
 
-const CreateBtn = ({ onCreate, preItems }) => {
+const CreateBtn = (props) => {
+
+  const navigate = useNavigate();
+
   function handleClick(e) {
     e.preventDefault();
-    onCreate([newItem, ...preItems])
+    // onCreate([newItem, ...preItems])
+    navigate('/create')
   }
 
 
@@ -34,7 +39,7 @@ const CreateBtn = ({ onCreate, preItems }) => {
 }
 
 CreateBtn.propTypes = {
-  onCreate: PropTypes.func.isRequired,
+  // onCreate: PropTypes.func.isRequired,
   // preItems: PropTypes.array.isRequired
 }
 

@@ -52,15 +52,18 @@ const Home = props => {
     let { categories, items } = props;
     items = [...Object.values(items)];
 
-    const [itemsArr, setItems] = useState(items)
     const [currentDate, setCurrentDate] = useState(parseToYearAndMonth())
 
-    const itemsWithCategory = itemsArr.map(item => {
-        item.category = categories[item.cid];
+    const itemsWithCategory = items.map(item => {
+        for (let c in categories) {
+            if ((categories[c].id * 1) === item.cid)
+                item.category = categories[c];
+        }
+        // item.category = categories[item.cid];
         return item;
     }).filter(item => {
         return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
-    })
+    });
 
     let totalIncome = 0, totalOutcome = 0;
     itemsWithCategory.forEach(item => {
@@ -70,6 +73,10 @@ const Home = props => {
             totalOutcome += item.price
         }
     })
+
+    function deleteItem(item) {
+        props.actions.deleteItem(item);
+    }
 
     return (
         <>
@@ -86,14 +93,17 @@ const Home = props => {
             <div className='content-area py-3 px-3'>
                 <Tabs>
                     <div label="列表模式" icon="ios-paper">
-                        <CreateBtn onCreate={setItems} preItems={items} />
-                        <PriceList
-                            items={itemsWithCategory}
-                            setItems={setItems}
-                        />
+                        <CreateBtn />
+                        {
+                            itemsWithCategory.length === 0 ? <div className="alert alert-light text-center no-record">您没有任何记账记录</div> :
+                                <PriceList
+                                    items={itemsWithCategory}
+                                    onDeleteItem={deleteItem}
+                                />
+                        }
                     </div>
                     <div label="图表模式" icon="ios-pie">
-                        <CreateBtn onCreate={setItems} preItems={items} />
+                        <CreateBtn />
                     </div>
                 </Tabs>
             </div>

@@ -7,22 +7,34 @@ import { AppContext } from "../../App";
 import withContext from "../../withContext";
 
 const Create = props => {
-    const {categories, items} = props
+    const {categories, items, actions} = props
     const { id } = useParams();
-    const [category, setCategory] = useState({});
-    console.log(categories, items);
+    const editItem = (id && items[id]) ? items[id] : {};
+    const [category, setCategory] = useState((editItem && editItem.cid) ? categories[editItem.cid] : null);
+
+    console.log(editItem);
+
+    function submitForm (data, isEditMode) {
+        if(!isEditMode) {
+            // create
+            actions.createItem(data, category);
+        }else {
+            // update
+            console.log(editItem);
+        }
+    }
 
     return (
         <div>
             <Tabs>
                 <div label="支出">
-                    <SelectCategory type='outcome' setCategory={setCategory} />
+                    <SelectCategory type='outcome' category={category} setCategory={setCategory} />
                 </div>
                 <div label="收入">
-                    <SelectCategory type='income' setCategory={setCategory} />
+                    <SelectCategory type='income' category={category} setCategory={setCategory} />
                 </div>
             </Tabs>
-            <SelectForm category={category} id={id} />
+            <SelectForm category={category} editItem={editItem} onSubmitForm={submitForm}/>
         </div>
     )
 }
