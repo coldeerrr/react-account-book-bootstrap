@@ -3,7 +3,7 @@ import Ionicon from 'react-ionicons'
 import PropTypes from 'prop-types'
 import { padLeft, createArr } from '../../utils/functions'
 
-const MonthPicker = ({ year, month, setCurrentDate }) => {
+const MonthPicker = ({ year, month, changeMonth }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [currentYear, setCurrentYear] = useState(year);
     const [currentMonth, setCurrentMonth] = useState(month);
@@ -41,7 +41,7 @@ const MonthPicker = ({ year, month, setCurrentDate }) => {
     function selectMonth(e, monthItem) {
         e.preventDefault();
         setCurrentMonth(monthItem);
-        setCurrentDate({ year: currentYear, month: monthItem })
+        changeMonth(currentYear, monthItem)
         setIsOpen(false);
     }
 

@@ -104,8 +104,6 @@ const categories = [
 const SelectCategory = ({ type, category, setCategory }) => {
     const [selected, setSelected] = useState(category);
 
-    console.log(selected);
-
     function handleSelect (e, category) {
         e.preventDefault();
         setSelected(category);

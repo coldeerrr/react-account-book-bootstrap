@@ -21,7 +21,7 @@ const PriceList = ({ items, onDeleteItem }) => {
                             <Ionicon
                                 className="rounded-circle"
                                 fontSize="35px"
-                                style={{ backgroundColor: '#bfa', padding: '4px' }}
+                                style={{ backgroundColor: '#007bff', padding: '4px' }}
                                 color={'#fff'}
                                 icon={item.category.iconName}
                             />
@@ -37,7 +37,7 @@ const PriceList = ({ items, onDeleteItem }) => {
                             <Ionicon
                                 className="rounded-circle"
                                 fontSize="35px"
-                                style={{ backgroundColor: '#bfa', padding: '4px' }}
+                                style={{ backgroundColor: '#007bff', padding: '4px' }}
                                 color={'#fff'}
                                 icon='ios-create-outline'
                             />
