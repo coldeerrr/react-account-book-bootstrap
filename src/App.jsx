@@ -53,11 +53,10 @@ const App = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const actions = {
-        deleteItem: (item) => {
-            axios.delete(`/items/${item.id}`).then(() => {
-                delete items[item.id];
-                setItems({ ...items });
-            })
+        deleteItem: async (item) => {
+            const deleteItem = await axios.delete(`/items/${item.id}`)
+            delete items[item.id];
+            setItems({ ...items });
         },
         createItem: (item, category) => {
             const cateNum = Object.keys(categories).length + 1;
@@ -81,24 +80,20 @@ const App = () => {
             console.log(updatedItem);
             setItems(Object.assign({ ...items }, { [updatedItem.id]: updatedItem }))
         },
-        getInitalData: () => {
+        getInitalData: async () => {
             setIsLoading(true);
             const getURLWithData = `/items?monthCategory=${currentDate.year}-${currentDate.month}&_sort=timestamp&_order=desc`;
-            const promisrArr = [axios.get('/categories'), axios.get(getURLWithData)];
-            Promise.all(promisrArr).then(arr => {
-                const [categoriesArr, itemsArr] = arr;
-                setCategories(flatternArr(categoriesArr.data));
-                setItems(flatternArr(itemsArr.data));
-                setIsLoading(false);
-            })
+            const resultArr = await Promise.all([axios.get('/categories'), axios.get(getURLWithData)]);
+            const [categoriesArr, itemsArr] = resultArr;
+            setCategories(flatternArr(categoriesArr.data));
+            setItems(flatternArr(itemsArr.data));
+            setIsLoading(false);
         },
-        selectMonth: (year, month) => {
+        selectMonth: async (year, month) => {
             const getURLWithData = `/items?monthCategory=${year}-${month}&_sort=timestamp&_order=desc`;
-            axios.get(getURLWithData).then(items => {
-                setItems(flatternArr(items.data));
-                setCurrentDate({year, month})
-            })
-
+            const items = await axios.get(getURLWithData)
+            setItems(flatternArr(items.data));
+            setCurrentDate({ year, month });
         }
     }
 
