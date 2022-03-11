@@ -19,7 +19,6 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
         const title = titleInput.current.value.trim();
         const price = priceInput.current.value.trim() * 1;
         const date = dateInput.current.value.trim();
-        console.log(editItem);
         const editMode = !!editItem; // 感叹号转换布尔值, 双感叹号取反, 判断是否为编辑模式
 
         if (title && price && date) {
@@ -47,7 +46,7 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
                     onSubmitForm({
                         id: Math.random().toString().slice(2), //生成随机数
                         price, title, date,
-                        cid: (category.id * 1)
+                        cid: category.id
                     }, editMode);
                     navigate('/')
                 }
@@ -104,6 +103,12 @@ const SelectForm = ({ category, editItem, onSubmitForm }) => {
             }
         </form>
     )
+}
+
+SelectForm.propTypes = {
+    category: PropTypes.object, 
+    editItem: PropTypes.object, 
+    onSubmitForm: PropTypes.func.isRequired
 }
 
 export default SelectForm

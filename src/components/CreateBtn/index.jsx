@@ -1,23 +1,13 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Ionicon from 'react-ionicons'
 import { useNavigate } from 'react-router-dom'
 
-const newItem = {
-  id: 4,
-  title: 'HangZhou travel',
-  price: 200,
-  date: '2022-03-07',
-  cid: 1
-};
-
-const CreateBtn = (props) => {
+const CreateBtn = () => {
 
   const navigate = useNavigate();
 
   function handleClick(e) {
     e.preventDefault();
-    // onCreate([newItem, ...preItems])
     navigate('/create')
   }
 
@@ -36,11 +26,6 @@ const CreateBtn = (props) => {
       创建一条新的记账记录
     </button>
   )
-}
-
-CreateBtn.propTypes = {
-  // onCreate: PropTypes.func.isRequired,
-  // preItems: PropTypes.array.isRequired
 }
 
 export default CreateBtn

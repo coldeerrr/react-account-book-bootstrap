@@ -2,106 +2,7 @@ import React, { useState } from "react";
 import Ionicon from 'react-ionicons'
 import PropTypes from 'prop-types'
 
-const categories = [
-    {
-        "name": "旅行",
-        "iconName": "ios-plane",
-        "id": "1",
-        "type": "outcome"
-    },
-    {
-        "name": "餐饮",
-        "iconName": "ios-restaurant",
-        "id": "2",
-        "type": "outcome"
-    },
-    {
-        "name": "购物",
-        "iconName": "ios-basket",
-        "id": "3",
-        "type": "outcome"
-    },
-    {
-        "name": "数码",
-        "iconName": "ios-phone-portrait",
-        "id": "4",
-        "type": "outcome"
-    },
-    {
-        "name": "交通",
-        "iconName": "ios-train",
-        "id": "5",
-        "type": "outcome"
-    },
-    {
-        "name": "娱乐",
-        "iconName": "ios-beer",
-        "id": "6",
-        "type": "outcome"
-    },
-    {
-        "name": "汽车",
-        "iconName": "ios-car",
-        "id": "7",
-        "type": "outcome"
-    },
-    {
-        "name": "医疗",
-        "iconName": "ios-medkit",
-        "id": "8",
-        "type": "outcome"
-    },
-    {
-        "name": "体育",
-        "iconName": "ios-football",
-        "id": "9",
-        "type": "outcome"
-    },
-    {
-        "name": "宠物",
-        "iconName": "ios-paw",
-        "id": "10",
-        "type": "outcome"
-    },
-    {
-        "name": "其他",
-        "iconName": "ios-apps",
-        "id": "11",
-        "type": "outcome"
-    },
-    {
-        "name": "工资",
-        "iconName": "ios-card",
-        "id": "12",
-        "type": "income"
-    },
-    {
-        "name": "兼职",
-        "iconName": "ios-cash",
-        "id": "13",
-        "type": "income"
-    },
-    {
-        "name": "理财",
-        "iconName": "logo-yen",
-        "id": "14",
-        "type": "income"
-    },
-    {
-        "name": "礼金",
-        "iconName": "logo-yen",
-        "id": "15",
-        "type": "income"
-    },
-    {
-        "name": "其他",
-        "iconName": "ios-apps",
-        "id": "16",
-        "type": "income"
-    }
-];
-
-const SelectCategory = ({ type, category, setCategory }) => {
+const SelectCategory = ({ type, category, categories, setCategory }) => {
     const [selected, setSelected] = useState(category);
 
     function handleSelect (e, category) {
@@ -109,6 +10,8 @@ const SelectCategory = ({ type, category, setCategory }) => {
         setSelected(category);
         setCategory(category);
     }
+
+    categories = [...Object.values(categories)]
 
     return (
         <div className="row">
@@ -136,7 +39,10 @@ const SelectCategory = ({ type, category, setCategory }) => {
 }
 
 SelectCategory.propTypes = {
-    type: PropTypes.string.isRequired
+    type: PropTypes.string.isRequired,
+    category: PropTypes.object, 
+    categories: PropTypes.object.isRequired, 
+    setCategory: PropTypes.func.isRequired
 }
 
 export default SelectCategory

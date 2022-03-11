@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PriceList from '../../components/PriceList'
 import Tabs from '../../components/Tabs'
 import MonthPicker from '../../components/MonthPicker'
 import TotalPrice from '../../components/TotalPrice'
 import CreateBtn from '../../components/CreateBtn'
 import Loader from '../../components/Loader'
+import PieChart from '../../components/MyPieChart'
 import './index.css'
 import { TYPE_INCOME, TYPE_OUTCOME } from '../../utils/constants'
-import { parseToYearAndMonth, padLeft } from '../../utils/functions'
 import withContext from '../../withContext'
 
 const Home = props => {
@@ -18,9 +18,7 @@ const Home = props => {
     const itemsWithCategory = items.map(item => {
         item.category = categories[item.cid];
         return item;
-    }).filter(item => {
-        return item.date.includes(`${currentDate.year}-${padLeft(currentDate.month)}`)
-    });
+    })
 
     let totalIncome = 0, totalOutcome = 0;
     itemsWithCategory.forEach(item => {
@@ -38,6 +36,26 @@ const Home = props => {
     function changeMonth(year, month) {
         actions.selectMonth(year, month)
     }
+
+    function generateChartDataByCategory (items, type = TYPE_INCOME) {
+        let categoryMap ={};
+        items.filter(item => item.category.type === type).forEach(item => {
+            if (categoryMap[item.cid]) {
+                categoryMap[item.cid].value += item.price * 1;
+                categoryMap[item.cid].items.push(item.id);
+            }else {
+                categoryMap[item.cid] = {
+                    name: item.category.name,
+                    value: item.price * 1,
+                    items: [item.id]
+                }
+            }
+        })
+        return [...Object.values(categoryMap)];
+    }
+
+    const chartOutcomeDataByCategory = generateChartDataByCategory(itemsWithCategory, TYPE_OUTCOME);
+    const chartIncomeDataByCategory = generateChartDataByCategory(itemsWithCategory, TYPE_INCOME);
 
     useEffect(() => {
         actions.getInitalData();
@@ -71,6 +89,8 @@ const Home = props => {
                             </div>
                             <div label="图表模式" icon="ios-pie">
                                 <CreateBtn />
+                                <PieChart title="支出" chartData={chartOutcomeDataByCategory} />
+                                <PieChart title="收入" chartData={chartIncomeDataByCategory} />
                             </div>
                         </Tabs>
                     </div>

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom'
 import SelectCategory from "../../components/SelectCategory";
 import Tabs from '../../components/Tabs';
 import SelectForm from "../../components/SelectForm";
-import { AppContext } from "../../App";
 import withContext from "../../withContext";
 
 const Create = props => {
@@ -22,14 +21,18 @@ const Create = props => {
         }
     }
 
+    useEffect(() => {
+        actions.getEditData(id);
+    }, [])
+
     return (
         <div>
             <Tabs>
                 <div label="支出">
-                    <SelectCategory type='outcome' category={category} setCategory={setCategory} />
+                    <SelectCategory type='outcome' categories={categories} category={category} setCategory={setCategory} />
                 </div>
                 <div label="收入">
-                    <SelectCategory type='income' category={category} setCategory={setCategory} />
+                    <SelectCategory type='income' categories={categories} category={category} setCategory={setCategory} />
                 </div>
             </Tabs>
             <SelectForm category={category} editItem={editItem} onSubmitForm={submitForm}/>

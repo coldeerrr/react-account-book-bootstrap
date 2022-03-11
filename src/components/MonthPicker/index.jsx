@@ -95,7 +95,8 @@ const MonthPicker = ({ year, month, changeMonth }) => {
 
 MonthPicker.propTypes = {
     year: PropTypes.number.isRequired,
-    month: PropTypes.number.isRequired
+    month: PropTypes.number.isRequired,
+    changeMonth: PropTypes.func.isRequired
 }
 
 export default MonthPicker
