@@ -49,8 +49,7 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    
-  },
-  "proxy": "http://localhost:3006"
+  "devDependencies": {},
+  "proxy": "http://localhost:3006",
+  "homepage": "https: //fyxwanan.github.io/react-account-book-bootstrap"
 }
