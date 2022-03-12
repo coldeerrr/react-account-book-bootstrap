@@ -1,74 +1,43 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
+# react-account-book-bootstrap:book:
+*基于React的在线账本*
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 用到的技术/工具:wrench:
+**前端：**
+ - `React` 脚手架 `create-react-app`
+ - `React-Hook` 常用的钩子 `(useState/useEffect...)`
+ - `React-Router` 前端路由
+ - `Axios`  集成网络请求
+ - `Recharts`  图表库
+ - `Bootstrap`  样式库
+ - 第三方库 `(Ionicon...)`
+ 
+**后端：**
+ - `JSON-server` 模拟后台提供数据
 
-## Available Scripts
+## 主要功能:bulb:
 
-In the project directory, you can run:
+- 收支展示
+- 分月展示
+- 添加账目
+- 删除账目
+- 编辑账目
+- 图表展示
 
-### `npm start`
+## 项目结构:page_facing_up:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# react-account-book-bootstrap
->>>>>>> d359858d93dfd08f7674ff06bac3afca0d0daaa3
+    |- src
+    |  |- components: 封装的可复用组件
+    |  |  |- CreateBtn: 创建新账目按钮
+    |  |  |- Loader: 加载中组件
+    |  |  |- MonthPicker: 日期选择组件
+    |  |  |- MyPieChart: 图表展示的组件
+    |  |  |- PriceList: 账目列表哦组件
+    |  |  |- SelectCategory: 选择分类组件
+    |  |  |- SelectForm: 选择信息组件
+    |  |  |- Tabs: 切换栏组件
+    |  |  |- TotalPrice: 价格展示组件
+    |  |- pages: 路由组件
+    |  |  |- Create: 创建/编辑界面
+    |  |  |- Home: 主界面
+    |  |- utils: 公用的函数、常量
+    |  |- WithContext.jsx: 封装的提供context的高阶组件
