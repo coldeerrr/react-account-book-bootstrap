@@ -23,6 +23,16 @@
 - 编辑账目
 - 图表展示
 
+## 项目预览:eyes:
+![列表模式](https://files.mdnice.com/user/28027/6ddb33a1-1f90-4878-be82-5ad72543bf33.png)
+
+
+![图表模式](https://files.mdnice.com/user/28027/61db583b-8424-4d79-a3c4-8634bc259ba6.png)
+
+
+![编辑模式](https://files.mdnice.com/user/28027/3d3481d6-8687-4c12-b70d-88a331d7b5eb.png)
+
+
 ## 项目结构:page_facing_up:
 
     |- src

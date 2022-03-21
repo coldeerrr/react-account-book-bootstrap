@@ -50,6 +50,5 @@
     ]
   },
   "devDependencies": {},
-  "proxy": "http://localhost:3006",
-  "homepage": "https: //fyxwanan.github.io/react-account-book-bootstrap"
+  "proxy": "http://localhost:3006"
 }
