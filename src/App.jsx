@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Home from './pages/Home'
-import Create from './pages/Create'
 import { flatternArr, parseToYearAndMonth } from './utils/functions'
 import axios from 'axios'
+
+// import Home from './pages/Home'
+// import Create from './pages/Create'
+import Loader from './components/Loader'
+
+const Home = lazy(() => import('./pages/Home'))
+const Create = lazy(() => import('./pages/Create'))
 
 // const categoriesArr = [
 //     {
@@ -100,12 +105,12 @@ const App = () => {
             if (Object.keys(categories).length === 0) {
                 promiseArr.push(axios.get('/categories'));
             }
-        
+
             if (id && !itemIsLoaded) {
                 const getURLWithID = `/items/${id}`;
                 promiseArr.push(axios.get(getURLWithID));
             }
-            
+
             // 异步获取的数据
             const [categoriesArr, editItem] = await Promise.all(promiseArr);
 
@@ -138,11 +143,13 @@ const App = () => {
     return (
         <AppContext.Provider value={{ categories, items, currentDate, isLoading, actions }}>
             <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<Home />} />
-                    <Route path='create' element={<Create />} />
-                    <Route path='edit/:id' element={<Create />} />
-                </Routes>
+                <Suspense fallback={<Loader/>}>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='create' element={<Create />} />
+                        <Route path='edit/:id' element={<Create />} />
+                    </Routes>
+                </Suspense>
             </BrowserRouter>
         </AppContext.Provider>
     )
